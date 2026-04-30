@@ -6,7 +6,12 @@ public class DeadlyObject : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.GameOver();
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+
+            if (player != null)
+            {
+                player.Die();
+            }
         }
     }
 
@@ -14,7 +19,12 @@ public class DeadlyObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.GameOver();
+            PlayerController player = other.GetComponent<PlayerController>();
+
+            if (player != null)
+            {
+                player.Die();
+            }
         }
     }
 }

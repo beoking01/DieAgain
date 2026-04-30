@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         // Kiểm tra xem Scene hiện tại có UIManager không trước khi gọi
         if (UIManager.Instance != null)
         {
+            AudioManager.Instance.PlaySFX(SoundType.GameWin);
             UIManager.Instance.ShowWinGameUI();
         }
     }
@@ -51,12 +52,19 @@ public class GameManager : MonoBehaviour
     {
         if (!isGameActive) return;
 
-        FinishGame();
-        // Kiểm tra xem Scene hiện tại có UIManager không trước khi gọi
+        isGameActive = false;
+
         if (UIManager.Instance != null)
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySFX(SoundType.GameOver);
+            }
+
             UIManager.Instance.ShowOverGameUI();
         }
+
+        Time.timeScale = 0f;
     }
 
     private void FinishGame()
