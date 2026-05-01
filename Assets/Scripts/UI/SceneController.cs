@@ -3,6 +3,25 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    public static void LoadLevelOrFallback(int levelIndex)
+    {
+        Time.timeScale = 1f;
+
+        string sceneName = "Level_" + levelIndex.ToString("00");
+
+        if (TryLoadScene(sceneName))
+        {
+            return;
+        }
+
+        Debug.LogWarning("Scene '" + sceneName + "' could not be loaded. Returning to SelectLevel.");
+
+        if (!TryLoadScene("SelectLevel"))
+        {
+            Debug.LogWarning("Fallback scene 'SelectLevel' could not be loaded.");
+        }
+    }
+
     public void LoadMenu()
     {
         Time.timeScale = 1f;
@@ -17,8 +36,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadLevel(int levelIndex)
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("Level_" + levelIndex.ToString("00"));
+        LoadLevelOrFallback(levelIndex);
     }
 
     public void ReloadCurrentLevel()
@@ -48,6 +66,18 @@ public class SceneController : MonoBehaviour
     {
         Application.Quit();
     }
+
+    private static bool TryLoadScene(string sceneName)
+    {
+        if (!Application.CanStreamedLevelBeLoaded(sceneName))
+        {
+            return false;
+        }
+
+        SceneManager.LoadScene(sceneName);
+        return true;
+    }
+
     public void Resume()
     {
         GameManager.Instance.TogglePause();

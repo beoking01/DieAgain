@@ -75,14 +75,30 @@ public class GameManager : MonoBehaviour
 
     private void UnlockNextLevel()
     {
-        int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
-        // Giả sử index 0 là Main Menu, các Level bắt đầu từ index 1
-        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        int currentLevel = GetCurrentLevelIndex();
 
-        if (currentBuildIndex >= unlockedLevel)
+        if (currentLevel > 0)
         {
-            PlayerPrefs.SetInt("UnlockedLevel", currentBuildIndex + 1);
-            PlayerPrefs.Save();
+            LevelManager.Instance.CompleteLevel(currentLevel);
         }
+    }
+
+    private int GetCurrentLevelIndex()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if (!sceneName.StartsWith("Level_"))
+        {
+            return -1;
+        }
+
+        string levelNumberText = sceneName.Substring("Level_".Length);
+
+        if (int.TryParse(levelNumberText, out int levelIndex))
+        {
+            return levelIndex;
+        }
+
+        return -1;
     }
 }
