@@ -1409,14 +1409,13 @@ Transform:
   m_GameObject: {fileID: 337697094}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.84404, y: -0, z: 4.47417}
+  m_LocalPosition: {x: 5.84404, y: -3.04, z: 4.47417}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 248710867}
   - {fileID: 1828710802}
   - {fileID: 330585546}
-  - {fileID: 1081817026}
   - {fileID: 351940283}
   - {fileID: 737685795}
   m_Father: {fileID: 0}
@@ -7923,6 +7922,7 @@ MonoBehaviour:
   traps:
   - {fileID: 1523905347}
   oneTimeOnly: 0
+  trapTag: Player
 --- !u!65 &832646089
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12515,7 +12515,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 337697095}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1299267007043125791, guid: 5ed759022dcdb8d45a74d85e5fbe64a8, type: 3}
       propertyPath: runDust
@@ -12527,15 +12527,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5192802466580580286, guid: 5ed759022dcdb8d45a74d85e5fbe64a8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.84404
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5192802466580580286, guid: 5ed759022dcdb8d45a74d85e5fbe64a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5192802466580580286, guid: 5ed759022dcdb8d45a74d85e5fbe64a8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.47417
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5192802466580580286, guid: 5ed759022dcdb8d45a74d85e5fbe64a8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12581,3 +12581,4 @@ SceneRoots:
   - {fileID: 6836172}
   - {fileID: 2007462766}
   - {fileID: 403119692}
+  - {fileID: 6009524629237101443}

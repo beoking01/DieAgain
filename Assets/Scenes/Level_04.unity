@@ -1793,7 +1793,7 @@ Transform:
   m_GameObject: {fileID: 337697094}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.84404, y: -0, z: 4.47417}
+  m_LocalPosition: {x: 5.84404, y: -3, z: 4.47417}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8078,6 +8078,7 @@ MonoBehaviour:
   traps:
   - {fileID: 831082920}
   oneTimeOnly: 1
+  trapTag: Player
 --- !u!114 &615887010 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1504212483701388359, guid: 581f3591dd960d2448e67cdb44ebadb8, type: 3}
@@ -10576,6 +10577,7 @@ MonoBehaviour:
   traps:
   - {fileID: 135682528}
   oneTimeOnly: 1
+  trapTag: Player
 --- !u!65 &1305400075
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11805,6 +11807,7 @@ MonoBehaviour:
   traps:
   - {fileID: 825932087}
   oneTimeOnly: 1
+  trapTag: Player
 --- !u!1001 &1774153206
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13567,6 +13570,7 @@ MonoBehaviour:
   traps:
   - {fileID: 615887010}
   oneTimeOnly: 1
+  trapTag: Player
 --- !u!1 &2126766863
 GameObject:
   m_ObjectHideFlags: 0
@@ -14178,11 +14182,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5192802466580580286, guid: 5ed759022dcdb8d45a74d85e5fbe64a8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.03404
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5192802466580580286, guid: 5ed759022dcdb8d45a74d85e5fbe64a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.06
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5192802466580580286, guid: 5ed759022dcdb8d45a74d85e5fbe64a8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14232,5 +14236,5 @@ SceneRoots:
   - {fileID: 135082428}
   - {fileID: 364973322}
   - {fileID: 29728366}
-  - {fileID: 6009524629237101443}
   - {fileID: 421716398}
+  - {fileID: 6009524629237101443}

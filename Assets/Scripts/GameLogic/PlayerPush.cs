@@ -19,6 +19,6 @@ public class PlayerPush : MonoBehaviour
         // Tạo lực đẩy ngang
         Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
 
-        rb.velocity = pushDir * pushForce;
+        rb.linearVelocity = pushDir * pushForce;
     }
 }
