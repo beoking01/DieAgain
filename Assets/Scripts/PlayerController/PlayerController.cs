@@ -8,6 +8,10 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 6f;
     public float rotationSpeed = 12f;
 
+    [Header("Mobile Input")]
+    [SerializeField] private JoystickInput mobileJoystick;
+    [SerializeField] private JumpButtonInput mobileJumpButton;
+
     [Header("Jump & Gravity")]
     public float jumpHeight = 1.8f;
     public float gravity = -9.81f;
@@ -23,7 +27,6 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 verticalVelocity;
     private Animator animator;
-
     private bool isDead = false;
 
     private void Awake()
@@ -42,25 +45,30 @@ public class PlayerController : MonoBehaviour
         isGround = controller.isGrounded;
 
         Vector3 moveDirection = CalculateMovement();
-
         CalculateGravityAndJump();
 
         Vector3 finalMovement = moveDirection * moveSpeed + verticalVelocity;
         controller.Move(finalMovement * Time.deltaTime);
 
         RotatePlayer(moveDirection);
-
         HandleAnimation(moveDirection);
-
         HandleRunDust(moveDirection);
     }
 
     private Vector3 CalculateMovement()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        Vector2 input = Vector2.zero;
 
-        Vector3 move = new Vector3(horizontal, 0f, vertical);
+        if (mobileJoystick != null && mobileJoystick.IsUsingJoystick)
+        {
+            input = mobileJoystick.Direction;
+        }
+        else
+        {
+            input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        }
+
+        Vector3 move = new Vector3(input.x, 0f, input.y);
 
         if (move.magnitude > 1f)
         {
@@ -77,7 +85,14 @@ public class PlayerController : MonoBehaviour
             verticalVelocity.y = -2f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGround)
+        bool jumpPressed = Input.GetKeyDown(KeyCode.Space);
+
+        if (mobileJumpButton != null && mobileJumpButton.ConsumeJump())
+        {
+            jumpPressed = true;
+        }
+
+        if (jumpPressed && isGround)
         {
             if (AudioManager.Instance != null)
             {
@@ -106,11 +121,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleAnimation(Vector3 move)
     {
-        Vector3 horizontalVelocity = new Vector3(
-            controller.velocity.x,
-            0f,
-            controller.velocity.z
-        );
+        Vector3 horizontalVelocity = new Vector3(controller.velocity.x, 0f, controller.velocity.z);
 
         bool isMoving = horizontalVelocity.magnitude > 0.2f;
         bool isJumping = !isGround || verticalVelocity.y > 0.2f;
@@ -150,8 +161,6 @@ public class PlayerController : MonoBehaviour
 
         isDead = true;
 
-        Debug.Log("Player Die được gọi");
-
         if (runDust != null && runDust.isPlaying)
         {
             runDust.Stop();
@@ -165,8 +174,6 @@ public class PlayerController : MonoBehaviour
 
         animator.SetBool("isMoving", false);
         animator.SetBool("isJumping", false);
-
-        // Gọi thẳng animation Die1, không cần transition
         animator.Play("Die1", 0, 0f);
 
         StartCoroutine(DieRoutine());
